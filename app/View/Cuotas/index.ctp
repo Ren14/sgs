@@ -18,10 +18,7 @@
 		</div>	
 		<div class="col-lg-1 col-md-4 col-sm-6  col-xs-4">
 			<a type="button" class="btn btn-outline btn-success pull-right" href="<?php echo $this->Html->url(array('action' => 'add')); ?>" style="margin-top: 25px"> Nueva C.</a>						
-		</div>		
-		<div class="col-lg-1 col-md-4 col-sm-6  col-xs-4">
-			<a type="button" class="btn btn-outline btn-primary pull-right" href="<?php echo $this->Html->url(array('action' => 'add_historicas')); ?>" style="margin-top: 25px"> C. Historicas</a>
-		</div>
+		</div>				
 	</div>
 	<hr>
 	<?php } ?>

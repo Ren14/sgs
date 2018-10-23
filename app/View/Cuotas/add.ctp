@@ -39,12 +39,18 @@
 				?>
 			</div>
 		</div>
-		<div class='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
+		<div class='col-xs-12 col-sm-6 col-md-6 col-lg-6'>
 			<div class='form-group'>
-				<?php echo $this->Form->input('Cuota.photo', array('type' => 'file', 'label' => 'Adjunto')); ?>
+				<?php echo $this->Form->input('Cuota.photo', array('type' => 'file', 'label' => 'Adjuntar archivo')); ?>
     			<?php echo $this->Form->input('Cuota.photo_dir', array('type' => 'hidden')); ?>
 			</div>
 		</div>
+		<div class='col-xs-12 col-sm-6 col-md-6 col-lg-6'>
+				<div class="alert alert-danger alert-dismissible" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <strong>ATENCIÓN!</strong><br><br> Recuerde que si elige el <strong>tipo de pago Transferencia-Cheque-Tarjeta-Otro </strong> deberá agregar una <strong>Observación</strong> que detalle la transacción seleccionada y <strong>adjuntar el archivo asociado</strong>.
+				</div>
+			</div>
 	</fieldset>
 	<hr>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="div-lotes" style="overflow-x: overlay">
