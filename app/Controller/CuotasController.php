@@ -186,7 +186,7 @@ public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99
 			);
 	}else{
 		$options = array();
-		$limit = 10;
+		//$limit = 10;
 		//$options['Cuota.activo'] = 1;
 		if($filtro_estado != 99){
 			$options['Cuota.estado'] = $filtro_estado;
@@ -199,6 +199,10 @@ public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99
 		if($filtro_numero_recibo != 99){
 			$options['Cuota.recibo_id'] = $filtro_numero_recibo;
 			$limit = 0;
+		}
+		if($desde == null && $hasta == null){
+			$desde = date('Y-m-d')." 00:00:00";
+			$hasta = date('Y-m-d')." 23:59:59";
 		}
 		if($desde != null && $hasta != null){
 			$options['Cuota.fecha_pago >='] = $desde." 00:00:00";

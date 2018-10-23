@@ -32,7 +32,10 @@ public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99
 			array_push($options['conditions'], array('CuotaAgua.lote_id' => $filtro_lote));
 		if($filtro_numero_recibo != 99)
 			array_push($options['conditions'], array('CuotaAgua.recibo_id' => $filtro_numero_recibo));
-		
+		if($desde == null && $hasta == null){
+			$desde = date('Y-m-d')." 00:00:00";
+			$hasta = date('Y-m-d')." 23:59:59";
+		}
 		if($desde != null && $hasta != null){
 			$options['conditions']['CuotaAgua.fecha_pago >='] = $desde." 00:00:00";
 			$options['conditions']['CuotaAgua.fecha_pago <='] = $hasta." 23:59:59";

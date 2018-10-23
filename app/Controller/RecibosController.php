@@ -100,7 +100,10 @@ public function index($filtro_estado = 99, $filtro_tipo = 99, $filtro_socio = 99
 			$options['Recibo.tipo'] = $filtro_tipo;
 		if($filtro_socio != 99)
 			$options['Recibo.socio_id'] = $filtro_socio;
-
+		if($desde == null && $hasta == null){
+			$desde = date('Y-m-d')." 00:00:00";
+			$hasta = date('Y-m-d')." 23:59:59";
+		}
 		if($desde != null && $hasta != null){
 			$options['Recibo.created >='] = $desde." 00:00:00";
 			$options['Recibo.created <='] = $hasta." 23:59:59";

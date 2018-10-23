@@ -21,10 +21,11 @@ public $components = array('Paginator', 'Session');
  * @return void
  */
 public function index($desde = null, $hasta = null) {
+
 	if($this->Session->read('Auth.User.rol') == 3){
 		if($desde == null && $hasta == null){
 			$desde = date('Y-m-d')." 00:00:00";
-			$hasta =date('Y-m-d')." 23:59:59";
+			$hasta = date('Y-m-d')." 23:59:59";
 		}
 		if($desde != null && $hasta != null){
 			$conditions = array(

@@ -10,7 +10,7 @@
 			<div class="form-group">
 				<div class="input text">
 					<label for="">Fecha Inicio </label>
-					<input name="fecha_ini" class="form-control" type="date" id="fecha_ini" required="required" value="<?php if($desde){echo $desde;} ?>">
+					<input name="fecha_ini" class="form-control" type="date" id="fecha_ini" required="required" value="<?php $d = explode(" ", $desde);echo $d[0] ?>">
 				</div>			
 			</div>
 		</div>
@@ -18,7 +18,7 @@
 			<div class="form-group">
 				<div class="input text">
 					<label for="">Fecha Hasta </label>
-					<input name="fecha_fin" class="form-control" type="date" id="fecha_fin" required="required" value="<?php if($hasta){echo $hasta;} ?>">
+					<input name="fecha_fin" class="form-control" type="date" id="fecha_fin" required="required" value="<?php $h = explode(" ", $hasta);echo $h[0] ?>">
 				</div>			
 			</div>
 		</div>
