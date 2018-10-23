@@ -1,11 +1,11 @@
 # User specific & automatically generated files #
 #################################################
 app/webroot/index.php 
-/app/Config/core.php
-/app/webroot/files/
-/app/webroot/index.php
-/app/Config/database.php
-/app/tmp
+app/Config/core.php
+app/webroot/files/
+app/webroot/index.php
+app/Config/database.php
+app/tmp
 /lib/
 /app/Console/
 /lib/Cake/Console/Templates/skel/tmp/
