@@ -51,7 +51,7 @@ public function anularRecibo($id = null, $justificacion = null)
 					// AGREGO LA BITÁCORA
 				$this->loadModel('Bitacora');
 				$this->loadModel('Socio');
-				$socio = $this->Socio->find('first', array('conditions' => array('Socio.id' => $lote['Lote']['socio_id']), 'fields' => array('Socio.apellido', 'Socio.nombre'), 'recursive' => -1));
+				$socio = $this->Socio->find('first', array('conditions' => array('Socio.id' => $recibo_aux['Recibo']['socio_id']), 'fields' => array('Socio.apellido', 'Socio.nombre'), 'recursive' => -1));
 				if($this->Bitacora->agregarBitacora('Anular Recibo #' . $recibo_aux['Recibo']['numero'] . ". Motivo:" . $justificacion." // Socio ".$socio['Socio']['apellido'].", ".$socio['Socio']['nombre'])){
 					$error = 0;		
 				} else {

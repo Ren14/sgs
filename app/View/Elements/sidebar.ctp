@@ -29,7 +29,9 @@ switch ($rol) {
                         </span> </a>
                     </div>                        
                 </li>
-
+                <li>
+                    <a href="<?php echo $this->Html->url(array('action' => 'display', 'controller' => 'Pages')); ?>"><i class="fa fa-rss"></i> <span class="nav-label">Noticias</span></a>
+                </li>
                 <?php if($rol != 1){ ?>
                 <li>
                     <a href="<?php echo $this->Html->url(array('action' => 'index', 'controller' => 'Socios')); ?>"><i class="fa fa-group"></i> <span class="nav-label">Socios</span></a>

@@ -34,7 +34,7 @@
 </div>
 </div>
 <div class='col-xs-12 col-sm-6 col-md-6 col-lg-6'>
-<div class='form-group'>		<label><?php echo __('Anio Pago'); ?></label>
+<div class='form-group'>		<label><?php echo __('Año Pago'); ?></label>
 		<input class='form-control' readonly='true' value='<?php echo h($cuota['Cuota']['anio_pago']); ?>'>
 </div>
 </div>
@@ -63,6 +63,13 @@
 		<input class='form-control' readonly='true' value='<?php echo date('d-m-Y h:i:s', strtotime($cuota['Cuota']['modified'])); ?>'>
 </div>
 </div>
+<?php if(isset($cuota['Cuota']['justificacion']) && $cuota['Cuota']['justificacion'] != ''){ ?>
+	<div class='col-xs-12 col-sm-6 col-md-6 col-lg-6'>
+	<div class='form-group'>		<label><?php echo __('Justificación por anulación'); ?></label>
+			<input class='form-control' readonly='true' value='<?php echo $cuota['Cuota']['justificacion']; ?>'>
+	</div>
+	</div>
+<?php } ?>
 <div class='col-xs-12 col-sm-6 col-md-6 col-lg-6'>
 <?php if(isset($cuota['Cuota']['photo']) && $cuota['Cuota']['photo'] != ''){ ?>								
 	<?php echo $this->Html->link(
@@ -73,7 +80,6 @@
 	
 <?php } ?>
 </div>
-
 	
 </div>
 <div class="row">
