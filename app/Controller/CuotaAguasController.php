@@ -20,7 +20,7 @@ public $components = array('Paginator','Session');
  *
  * @return void
  */
-public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99, $filtro_numero_recibo = 99) {
+public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99, $filtro_numero_recibo = 99,$desde = null, $hasta = null) {
 	$options = array('conditions' => array('CuotaAgua.activo' => 1), 'recursive' => 1);
 
 	if($this->Session->read('Auth.User.rol') == 1){
@@ -32,6 +32,15 @@ public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99
 			array_push($options['conditions'], array('CuotaAgua.lote_id' => $filtro_lote));
 		if($filtro_numero_recibo != 99)
 			array_push($options['conditions'], array('CuotaAgua.recibo_id' => $filtro_numero_recibo));
+		
+		if($desde != null && $hasta != null){
+			$options['conditions']['CuotaAgua.fecha_pago >='] = $desde." 00:00:00";
+			$options['conditions']['CuotaAgua.fecha_pago <='] = $hasta." 23:59:59";
+		}else if($desde != null && $hasta == null){
+			$options['conditions']['CuotaAgua.fecha_pago >='] = $desde." 00:00:00";
+		}else if($hasta != null && $desde == null){
+			$options['conditions']['CuotaAgua.fecha_pago <='] = $hasta." 23:59:59";
+		}
 	}
 
 	$cuotaAguas = $this->CuotaAgua->find('all', $options);
@@ -60,7 +69,7 @@ public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99
 	$estados = $this->CuotaAgua->estados;
 	$estados_label = $this->CuotaAgua->estados_label;
 	$tipo_pago = $this->CuotaAgua->tipo_pago;
-	$this->set(compact('estados', 'estados_label', 'cuotaAguas', 'tipo_pago', 'lotes', 'socios', 'recibos', 'filtro_numero_recibo', 'filtro_socio', 'filtro_lote', 'filtro_estado'));
+	$this->set(compact('estados', 'estados_label', 'cuotaAguas', 'tipo_pago', 'lotes', 'socios', 'recibos', 'filtro_numero_recibo', 'filtro_socio', 'filtro_lote', 'filtro_estado','desde','hasta'));
 }
 
 /**

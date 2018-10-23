@@ -1,7 +1,7 @@
-<?php if(!isset($this->request->params['desde'])){ ?>
+<?php if(!isset($desde)){ ?>
 	<?php $desde = date('Y-m-d') ?>
 <?php } ?> 
-<?php if(!isset($this->request->params['hasta'])){ ?>
+<?php if(!isset($hasta)){ ?>
 	<?php $hasta = date('Y-m-d') ?>
 <?php } ?> 
 <div class="ibox float-e-margins bitacoras index">

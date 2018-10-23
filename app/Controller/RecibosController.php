@@ -84,7 +84,7 @@ public function anularRecibo($id = null, $justificacion = null)
  *
  * @return void
  */
-public function index($filtro_estado = 99, $filtro_tipo = 99, $filtro_socio = 99) {
+public function index($filtro_estado = 99, $filtro_tipo = 99, $filtro_socio = 99,$desde = null, $hasta = null) {
 	$this->Recibo->recursive = 2;
 	if($this->Session->read('Auth.User.rol') == 1){
 		$recibos = $this->Recibo->find('all',array(
@@ -100,6 +100,16 @@ public function index($filtro_estado = 99, $filtro_tipo = 99, $filtro_socio = 99
 			$options['Recibo.tipo'] = $filtro_tipo;
 		if($filtro_socio != 99)
 			$options['Recibo.socio_id'] = $filtro_socio;
+
+		if($desde != null && $hasta != null){
+			$options['Recibo.created >='] = $desde." 00:00:00";
+			$options['Recibo.created <='] = $hasta." 23:59:59";
+		}else if($desde != null && $hasta == null){
+			$options['Recibo.created >='] = $desde." 00:00:00";
+		}else if($hasta != null && $desde == null){
+			$options['Recibo.created <='] = $hasta." 23:59:59";
+		}
+
 		$recibos = $this->Recibo->find('all', array('conditions' => $options));
 	}
 
@@ -112,7 +122,7 @@ public function index($filtro_estado = 99, $filtro_tipo = 99, $filtro_socio = 99
 		$tipo = $this->Recibo->tipo;
 		$estados_label = $this->Recibo->estados_label;
 		$estados = $this->Recibo->estados;
-		$this->set(compact('estados_label', 'recibos', 'tipo', 'socios', 'filtro_estado', 'filtro_socio', 'filtro_tipo', 'estados'));
+		$this->set(compact('estados_label', 'recibos', 'tipo', 'socios', 'filtro_estado', 'filtro_socio', 'filtro_tipo', 'estados','desde','hasta'));
 	}
 
 /**

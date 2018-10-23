@@ -1,6 +1,28 @@
+<?php if(!isset($desde)){ ?>
+	<?php $desde = date('Y-m-d') ?>
+<?php } ?> 
+<?php if(!isset($hasta)){ ?>
+	<?php $hasta = date('Y-m-d') ?>
+<?php } ?> 
 <div class="ibox float-e-margins recibos index">
 	<?php if(in_array($this->Session->read('Auth.User.rol'), array(2,3))){?>
 	<div class="row">
+		<div class="col-md-2 col-sm-3 col-lg-2 col-xs-12">
+			<div class="form-group">
+				<div class="input text">
+					<label for="">Fecha Inicio </label>
+					<input name="fecha_ini" class="form-control" type="date" id="fecha_ini" required="required" value="<?php if($desde){echo $desde;} ?>">
+				</div>			
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-3 col-lg-2 col-xs-12">
+			<div class="form-group">
+				<div class="input text">
+					<label for="">Fecha Hasta </label>
+					<input name="fecha_fin" class="form-control" type="date" id="fecha_fin" required="required" value="<?php if($hasta){echo $hasta;} ?>">
+				</div>			
+			</div>
+		</div>
 		<div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
 			<?php echo $this->Form->input('filtro_estado', array('class' => 'form-control', 'label' => 'Filtar por Estado', 'div' => 'false', 'value' => $filtro_estado, 'options' => $estados, 'empty' => 'Todos')) ?> 
 		</div>
@@ -74,6 +96,8 @@
 		});
 		function filtrarRecibos() {
 			// body...
+			var desde = $('#fecha_ini').val();
+			var hasta = $('#fecha_fin').val();
 			var estado = $('#filtro_estado').val();
 			var tipo = $('#filtro_tipo').val();
 			var socio = $('#filtro_socio').val();
@@ -85,7 +109,7 @@
 			if(socio == '')
 				socio = 99;
 			
-			var direccion = "<?php echo $this->Html->url(array('controller' => 'Recibos')) ?>/index/" + estado+'/'+tipo+'/'+socio;
+			var direccion = "<?php echo $this->Html->url(array('controller' => 'Recibos')) ?>/index/" + estado+'/'+tipo+'/'+socio+'/'+ desde+'/'+hasta;
 			
 			window.location.replace(direccion);
 		}

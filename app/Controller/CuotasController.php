@@ -177,7 +177,7 @@ public $components = array('Paginator','Session');
  *
  * @return void
  */
-public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99, $filtro_numero_recibo = 99) {
+public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99, $filtro_numero_recibo = 99,$desde = null, $hasta = null) {
 	$rol = $this->Session->read('Auth.User.rol');
 	if($rol == 1){
 		$options = array(
@@ -200,8 +200,16 @@ public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99
 			$options['Cuota.recibo_id'] = $filtro_numero_recibo;
 			$limit = 0;
 		}
+		if($desde != null && $hasta != null){
+			$options['Cuota.fecha_pago >='] = $desde." 00:00:00";
+			$options['Cuota.fecha_pago <='] = $hasta." 23:59:59";
+		}else if($desde != null && $hasta == null){
+			$options['Cuota.fecha_pago >='] = $desde." 00:00:00";
+		}else if($hasta != null && $desde == null){
+			$options['Cuota.fecha_pago <='] = $hasta." 23:59:59";
+		}
 	}
-	
+	$this->log($options);
 	$cuotas = $this->Cuota->find('all', array('conditions' => $options, 'limit' => $limit, 'order' => array('Cuota.created' => 'desc')));	
 
 	$this->loadModel('Lote');
@@ -228,7 +236,7 @@ public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99
 	$mes_desde = $this->Cuota->mes_desde;
 	$mes_hasta = $this->Cuota->mes_hasta;
 
-	$this->set(compact('estados', 'estados_label', 'mes_desde', 'mes_hasta', 'cuotas', 'filtro_estado', 'filtro_socio', 'filtro_lote', 'lotes', 'socios', 'filtro_numero_recibo', 'recibos'));
+	$this->set(compact('estados', 'estados_label', 'mes_desde', 'mes_hasta', 'cuotas', 'filtro_estado', 'filtro_socio', 'filtro_lote', 'lotes', 'socios', 'filtro_numero_recibo', 'recibos','desde','hasta'));
 }
 
 /**
