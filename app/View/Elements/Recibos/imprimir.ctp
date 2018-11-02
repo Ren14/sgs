@@ -23,7 +23,7 @@
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 			<br>
-			<p style="margin-bottom:1px;">RECIBO<br>
+			<p style="margin-bottom:1px;">RECIBO <?php echo ($recibo['Recibo']['activo'] == 1 ? '' : '<b style="color:red;">ANULADO</b>'); ?><br>
 			<span class="small">Documento No Válido como Factura</span>
 			</p>
 			<p style="margin-bottom:1px;"><strong>Nº</strong>: <?php echo "0001-" . str_pad($recibo['Recibo']['numero'],8,0, STR_PAD_LEFT); ?></p>
@@ -96,7 +96,7 @@
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 			<br>
-			<p style="margin-bottom:1px;">RECIBO<br>
+			<p style="margin-bottom:1px;">RECIBO <?php echo ($recibo_duplicado['Recibo']['activo'] == 1 ? '' : '<b style="color:red;">ANULADO</b>'); ?><br>
 			<span class="small">Documento No Válido como Factura</span>
 			</p>
 			<p style="margin-bottom:1px;"><strong>Nº</strong>: <?php echo "0001-" . str_pad($recibo_duplicado['Recibo']['numero'],8,0, STR_PAD_LEFT); ?></p>
