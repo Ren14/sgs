@@ -46,4 +46,9 @@ class PagesController extends AppController {
 
 		$this->set(compact('noticia_1', 'noticia_2', 'noticia_3'));
 	}
+
+	public function homeMovil()
+	{
+		# code...
+	}
 }

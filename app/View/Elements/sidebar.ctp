@@ -35,9 +35,9 @@ switch ($rol) {
                     <a href="<?php echo $this->Html->url(array('action' => 'display', 'controller' => 'Pages')); ?>"><i class="fa fa-rss"></i> <span class="nav-label">Noticias</span></a>
                 </li>
                 <?php if($rol != 1){ ?>
-                <li>
-                    <a href="<?php echo $this->Html->url(array('action' => 'index', 'controller' => 'Socios')); ?>"><i class="fa fa-group"></i> <span class="nav-label">Socios</span></a>
-                </li>
+                    <li>
+                        <a href="<?php echo $this->Html->url(array('action' => 'index', 'controller' => 'Socios')); ?>"><i class="fa fa-group"></i> <span class="nav-label">Socios</span></a>
+                    </li>
                 <?php } ?>
                 <li>
                     <a href="<?php echo $this->Html->url(array('action' => 'index', 'controller' => 'Lotes')); ?>"><i class="fa fa-home"></i> <span class="nav-label">Lotes</span></a>
