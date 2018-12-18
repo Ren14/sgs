@@ -26,7 +26,8 @@ class User extends AppModel {
 public $roles = array(
 	1 => 'Socio',
 	2 => 'Administrador',
-	3 => 'SuperAdmin'
+	3 => 'SuperAdmin',
+	4 => 'Auditor',
 	);
 
 public $estados_label = array(

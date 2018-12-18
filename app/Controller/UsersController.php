@@ -32,7 +32,7 @@ public function beforeFilter() {
 	parent::beforeFilter();
     	// Allow users to register and logout.
 		$this->Auth->allow('add', 'logout', 'comprobarUsername');
-		if($this->Session->read('Auth.User.rol') != 3){
+		if(in_array($this->Session->read('Auth.User.rol'), array(1,2))){
 			//$this->log($this->Auth->loggedIn(), 'debug');
 			if($this->Session->read('Auth.User.rol') == 1){
 				//$this->log($this->Auth->loggedIn(), 'debug');

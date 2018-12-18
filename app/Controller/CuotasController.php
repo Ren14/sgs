@@ -189,16 +189,13 @@ public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99
 		//$limit = 10;
 		//$options['Cuota.activo'] = 1;
 		if($filtro_estado != 99){
-			$options['Cuota.estado'] = $filtro_estado;
-			$limit = 0;
+			$options['Cuota.estado'] = $filtro_estado;			
 		}
 		if($filtro_lote != 99){
-			$options['Cuota.lote_id'] = $filtro_lote;
-			$limit = 0;
+			$options['Cuota.lote_id'] = $filtro_lote;			
 		}
 		if($filtro_numero_recibo != 99){
-			$options['Cuota.recibo_id'] = $filtro_numero_recibo;
-			$limit = 0;
+			$options['Cuota.recibo_id'] = $filtro_numero_recibo;			
 		}
 		if($desde == null && $hasta == null){
 			$desde = date('Y-m-d')." 00:00:00";
@@ -213,8 +210,8 @@ public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99
 			$options['Cuota.fecha_pago <='] = $hasta." 23:59:59";
 		}
 	}
-	$this->log($options);
-	$cuotas = $this->Cuota->find('all', array('conditions' => $options, 'limit' => $limit, 'order' => array('Cuota.created' => 'desc')));	
+	
+	$cuotas = $this->Cuota->find('all', array('conditions' => $options, 'order' => array('Cuota.created' => 'desc')));	
 
 	$this->loadModel('Lote');
 	foreach ($cuotas as $key => $cuota) {

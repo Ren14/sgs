@@ -5,7 +5,7 @@
 	<?php $hasta = date('Y-m-d') ?>
 <?php } ?> 
 <div class="ibox float-e-margins recibos index">
-	<?php if(in_array($this->Session->read('Auth.User.rol'), array(2,3))){?>
+	<?php if(in_array($this->Session->read('Auth.User.rol'), array(2,3,4))){?>
 	<div class="row">
 		<div class="col-md-2 col-sm-3 col-lg-2 col-xs-12">
 			<div class="form-group">

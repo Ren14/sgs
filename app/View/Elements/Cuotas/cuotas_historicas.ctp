@@ -21,7 +21,7 @@
 	<tbody>
 		<?php foreach ($aux as $key => $value) { 
 			if(isset($value['Cuota'] )){ ?> 
-				<?php if ($this->Session->read('Auth.User.rol') == 3 && $value['Cuota']['mes_desde'] == $value['Cuota']['mes_hasta'] && $value['Cuota']['recibo_id'] == '') {?>
+				<?php if (in_array($this->Session->read('Auth.User.rol'), array(2,3)) && $value['Cuota']['mes_desde'] == $value['Cuota']['mes_hasta'] && $value['Cuota']['recibo_id'] == '') {?>
 					<tr>					
 						<td><?php echo date('Y', strtotime($value['Fecha'])); 
 							echo $this->Form->input('Cuota.'.$key.'.anio_pago', array('type' => 'hidden', 'label' => false, 'div' => false, 'value' => date('Y', strtotime($value['Fecha']))));
@@ -39,7 +39,9 @@
 						<td>
 							<button style="display: none;" id="btn-<?php echo $key; ?>" type="button" onclick="guardarCuotaHistorica('<?php echo $key; ?>');" class="btn btn-outline btn-primary btn-xs"><i class="fa fa-save"></i></button>
 							<button type="button" id="btn-editar-<?php echo $key; ?>" onclick="editarCuotaHistorica('<?php echo $key; ?>');" class="btn btn-outline btn-warning btn-xs"><i class="fa fa-edit"></i></button>
+							<?php if ($this->Session->read('Auth.User.rol') == 3 ){ ?>
 							<button type="button" id="btn-eliminar-<?php echo $key; ?>" onclick="eliminarCuotaHistorica('<?php echo $key; ?>');" class="btn btn-outline btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+							<?php } ?>
 						</td>
 					</tr>
 				<?php } else { ?>
@@ -52,14 +54,7 @@
 					<td><?php echo $value['Cuota']['observacion'] . " Período " .  $nombre_mes[$value['Cuota']['mes_desde']] . "/". $nombre_mes[$value['Cuota']['mes_hasta']]; ?></td>
 					<td><?php echo @$value['Cuota']['recibo']; ?></td>
 					<td><?php echo @$value['Recibo']['numero']; ?></td>
-					<td><?php if(isset($value['Cuota']['photo']) && $value['Cuota']['photo'] != ''){ ?>								
-							<?php echo $this->Html->link(
-							    'Adjunto',
-							    '../files/cuota/photo/' . $value['Cuota']['photo_dir'] . '/' . $value['Cuota']['photo'],
-							    array('class' => 'btn btn-outline btn-info btn-xs', 'target' => '_blank', 'Title' => 'Descargar Archivo Adjunto')
-							); ?>
-							
-						<?php } ?></td>
+					<td></td>
 				</tr>
 				<?php } ?>
 			<?php } else { ?>
@@ -76,7 +71,12 @@
 					<td><?php echo $this->Form->input('Cuota.'.$key.'.observacion', array('class' => 'form-control', 'label' => false, 'div' => false, 'rows' => 1)); ?></td>
 					<td><?php echo $this->Form->input('Cuota.'.$key.'.recibo', array('class' => 'form-control', 'label' => false, 'div' => false)); ?></td>
 					<td></td>
-					<td><button id="btn-<?php echo $key; ?>" type="button" onclick="guardarCuotaHistorica('<?php echo $key; ?>');" class="btn btn-outline btn-primary btn-xs"><i class="fa fa-save"></i></button></td>
+					<td>
+						<?php 
+						# SI EL USUARIO NO ES UN AUDITOR, PUEDE CREAR
+						if($this->Session->read('Auth.User.rol') != 4){ ?>
+							<button id="btn-<?php echo $key; ?>" type="button" onclick="guardarCuotaHistorica('<?php echo $key; ?>');" class="btn btn-outline btn-primary btn-xs"><i class="fa fa-save"></i></button></td>
+						<?php }  ?>
 				</tr>
 			<?php } ?>
 		<?php } ?>		

@@ -12,6 +12,8 @@ switch ($rol) {
     case 3:
     $rolText = 'Super Admin';
     break;
+    case 4:
+    $rolText = 'Auditor';
     
     default:
         # code...
@@ -60,20 +62,26 @@ switch ($rol) {
                 </li>
                 <?php } 
 
-                if($rol == 3){ ?>
-                <li>
-                    <a href="<?php echo $this->Html->url(array('action' => 'index', 'controller' => 'Users')); ?>"><i class="fa fa-user"></i> <span class="nav-label">Usuarios</span></a>
-                </li>
-                <li>
-                    <a href="<?php echo $this->Html->url(array('action' => 'index', 'controller' => 'Parametros')); ?>"><i class="fa fa-cog"></i> <span class="nav-label">Parametros</span></a>
-                </li>            
-                <li>
-                    <a href="<?php echo $this->Html->url(array('action' => 'index', 'controller' => 'Bitacoras')); ?>"><i class="fa fa-hdd-o"></i> <span class="nav-label">Bitácora</span></a>
-                </li>
-                <li>
-                    <a href="<?php echo $this->Html->url(array('action' => 'getReportesIndex', 'controller' => 'Socios')); ?>"><i class="fa fa-bar-chart"></i> <span class="nav-label">Reportes</span></a>
-                </li>                    
-                
+                if($rol >= 3){ ?>
+                    <li>
+                        <a href="<?php echo $this->Html->url(array('action' => 'index', 'controller' => 'Users')); ?>"><i class="fa fa-user"></i> <span class="nav-label">Usuarios</span></a>
+                    </li>
+                    
+                    <?php 
+                    # SOLO EL SUPERADMIN TIENE ACCESO A PARAMETROS Y BITACORA
+                    if($rol == 3) {?>
+                        <li>
+                            <a href="<?php echo $this->Html->url(array('action' => 'index', 'controller' => 'Parametros')); ?>"><i class="fa fa-cog"></i> <span class="nav-label">Parametros</span></a>
+                        </li>            
+                        <li>
+                            <a href="<?php echo $this->Html->url(array('action' => 'index', 'controller' => 'Bitacoras')); ?>"><i class="fa fa-hdd-o"></i> <span class="nav-label">Bitácora</span></a>
+                        </li>
+                    <?php } ?>    
+                    
+                    <li>
+                        <a href="<?php echo $this->Html->url(array('action' => 'getReportesIndex', 'controller' => 'Socios')); ?>"><i class="fa fa-bar-chart"></i> <span class="nav-label">Reportes</span></a>
+                    </li>                    
+                    
                 <?php } ?>
                 <?php if($rol != 1) {?>
                 <li>

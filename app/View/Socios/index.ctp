@@ -7,7 +7,11 @@
 			<button type="button" class="btn btn-outline btn-default" onclick="filtrarSocios();" style="margin-top: 25px"> Filtrar</button>		
 		</div>
 		<div class="col-md-4 col-sm-4 col-lg-4 col-xs-3">
-			<a type="button" class="btn btn-outline btn-success" href="<?php echo $this->Html->url(array('action' => 'add')); ?>" style="margin-top: 25px"> Nuevo Socio</a>		
+			<?php 
+			# SI EL USUARIO ES DISTINTO DE AUDITOR
+			if (in_array($this->Session->read('Auth.User.rol'), array(2,3))) { ?>
+				<a type="button" class="btn btn-outline btn-success" href="<?php echo $this->Html->url(array('action' => 'add')); ?>" style="margin-top: 25px"> Nuevo Socio</a>
+			<?php } ?>		
 		</div>	
 	</div>
 	<hr class="hidden-xs">
@@ -47,9 +51,14 @@
 						<!--<td><?php echo date('d-m-Y H:i',strtotime($socio['Socio']['modified'])); ?>&nbsp;</td>-->
 						<td class="actions">
 							<a href="<?php echo $this->Html->url(array('action' => 'view', $socio['Socio']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
-							<a href="<?php echo $this->Html->url(array('action' => 'edit', $socio['Socio']['id']	)); ?>" type="button" class="btn btn-outline btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-							
-							<a href="#" onclick="borrar('<?php echo $socio['Socio']['id'] ?>', '<?php echo $this->Html->url(array('action' => 'desactivar')); ?>/')" type="button" class="btn btn-outline btn-danger btn-xs"><i class="fa fa-trash" title="ELIMINAR"></i></a>
+							<?php 
+							# SI EL USUARIO ES DISTINTO DE AUDITOR
+							if (in_array($this->Session->read('Auth.User.rol'), array(2,3))) { ?>
+								<a href="<?php echo $this->Html->url(array('action' => 'edit', $socio['Socio']['id']	)); ?>" type="button" class="btn btn-outline btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+								
+								<a href="#" onclick="borrar('<?php echo $socio['Socio']['id'] ?>', '<?php echo $this->Html->url(array('action' => 'desactivar')); ?>/')" type="button" class="btn btn-outline btn-danger btn-xs"><i class="fa fa-trash" title="ELIMINAR"></i></a>
+								
+							<?php } ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>

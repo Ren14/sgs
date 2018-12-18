@@ -1,6 +1,9 @@
 <div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">	
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<?php if (in_array($this->Session->read('Auth.User.rol'), array(2,3))) { ?>
 		<h2>Ver Registro <?php echo __('Socio'); ?> <a href="<?php echo $this->Html->url(array('controller' => 'users','action' => 'edit',$socio['User']['id'])) ?>" class="btn btn-primary pull-right"><i class="fa fa-edit"></i> Editar Perfil</a></h2>
+	<?php }	?>
+		
 	</div>
 	
 	<div class='col-xs-12 col-sm-6 col-md-6 col-lg-6'>

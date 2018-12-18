@@ -5,7 +5,7 @@
 	<?php $hasta = date('Y-m-d') ?>
 <?php } ?> 
 <div class="ibox float-e-margins cuotaAguas index">
-	<?php if(in_array($this->Session->read('Auth.User.rol'), array(2,3))){?>
+	<?php if(in_array($this->Session->read('Auth.User.rol'), array(2,3,4))){?>
 	<div class="row">
 		<div class="col-md-2 col-sm-3 col-lg-2 col-xs-12">
 			<div class="form-group">
@@ -39,7 +39,11 @@
 			<button type="button" class="btn btn-outline btn-default" onclick="filtrarCuotas();" style="margin-top: 25px"> Filtrar</button>		
 		</div>	
 		<div class="col-md-2 col-sm-2 col-lg-2 col-xs-6">
-			<a type="button" class="btn btn-outline btn-success pull-right" href="<?php echo $this->Html->url(array('action' => 'add')); ?>" style="margin-top: 25px"> Nueva Cuota</a>			
+			<?php 
+			# SI EL USUARIO NO ES UN AUDITOR, PUEDE CREAR
+			if($this->Session->read('Auth.User.rol') != 4){ ?>
+			<a type="button" class="btn btn-outline btn-success pull-right" href="<?php echo $this->Html->url(array('action' => 'add')); ?>" style="margin-top: 25px"> Nueva Cuota</a>		
+			<?php } ?>	
 		</div>		
 	</div>
 	<hr>
