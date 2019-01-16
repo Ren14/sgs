@@ -43,6 +43,8 @@
 					<th>Periodo/Cant Cuotas</th>					
 					<th>F. Pago</th>
 					<th>Estado</th>
+					<th>Justificacion</th>
+				
 				</tr>
 			</thead>
 			<tbody>
@@ -54,6 +56,11 @@
 						<td><?php echo $recibo['descripcion']; ?> </td>
 						<td><?php echo $recibo['fecha_pago']; ?> </td>
 						<td><?php echo $recibo['estado']; ?> </td>
+						<?php if (isset($recibo['justificacion'])) { ?>
+							<td><?php echo $recibo['justificacion']; ?> </td>
+						<?php } else {
+							echo "<td></td>";
+						} ?>
 					</tr>
 				<?php } ?>
 			</tbody>

@@ -61,7 +61,7 @@
 						
 						<td><?php echo $estados_label[$recibo['Recibo']['activo']]; ?>&nbsp;</td>
 						<td class="actions">
-							<a href="<?php echo $this->Html->url(array('action' => 'view', $recibo['Recibo']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
+							<a target="_blank" href="<?php echo $this->Html->url(array('action' => 'view', $recibo['Recibo']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
 							
 								<a target="_blank" href="<?php echo $this->Html->url(array('action' => 'view', $recibo['Recibo']['id'], 1)); ?>" type="button" class="btn btn-outline btn-default btn-xs"><i class="fa fa-print"></i></a>
 							<?php

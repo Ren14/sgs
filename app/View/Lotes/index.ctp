@@ -37,10 +37,10 @@
 						<td><?php echo $estado[$lote['Lote']['activo']]; ?>&nbsp;</td>
 						
 						<td class="actions">
-							<a href="<?php echo $this->Html->url(array('action' => 'view', $lote['Lote']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
+							<a target="_blank" href="<?php echo $this->Html->url(array('action' => 'view', $lote['Lote']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
 							<?php if(in_array($this->Session->read('Auth.User.rol'), array(2,3))){ ?>
 
-								<a href="<?php echo $this->Html->url(array('action' => 'edit', $lote['Lote']['id']	)); ?>" type="button" class="btn btn-outline btn-warning btn-xs"><i /class="fa fa-pencil"></i></a>
+								<a target="_blank" href="<?php echo $this->Html->url(array('action' => 'edit', $lote['Lote']['id']	)); ?>" type="button" class="btn btn-outline btn-warning btn-xs"><i /class="fa fa-pencil"></i></a>
 
 							<?php } ?>
 							<?php if ($lote['Lote']['activo'] && in_array($this->Session->read('Auth.User.rol'), array(2,3))) { ?>

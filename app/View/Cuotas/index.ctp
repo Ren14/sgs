@@ -75,7 +75,7 @@
 						<td data-order="<?php echo $cuota['Socio']['apellido'];?>">
 							<?php echo $this->Html->link($cuota['Socio']['apellido']. " ". $cuota['Socio']['nombre'], array('controller' => 'socios', 'action' => 'view', $cuota['Socio']['id'])); ?>
 						</td>
-						<td data-order="<?php echo $cuota['Cuota']['monto'];?>">$<?php echo number_format($cuota['Cuota']['monto'], 2, ",", "."); ?></td>
+						<td data-order="<?php echo $cuota['Cuota']['monto'];?>">$<?php echo number_format($cuota['Cuota']['monto'], 2, ".", ","); ?></td>
 						<td data-order="<?php echo $cuota['Recibo']['numero'];?>" class="hidden-xs"><?php echo $this->Html->link($cuota['Recibo']['numero'], array('controller' => 'recibos', 'action' => 'view', $cuota['Recibo']['id'])); ?></td>
 						<td data-order="<?php echo $cuota['Cuota']['recibo'];?>" class="hidden-xs"><?php echo h($cuota['Cuota']['recibo']); ?></td>
 						<td><?php echo $cuota['Cuota']['anio_pago'] . " ". $mes_desde[$cuota['Cuota']['mes_desde']] . "/". $mes_hasta[$cuota['Cuota']['mes_hasta']]; ?></td>
@@ -83,7 +83,7 @@
 						<td data-order="<?php echo $cuota['Cuota']['fecha_pago']; ?>"><?php echo  date('d-m-Y', strtotime($cuota['Cuota']['fecha_pago'])); ?></td>
 						<td><?php echo $estados_label[$cuota['Cuota']['estado']]; ?></td>
 						<td class="actions">							
-							<a href="<?php echo $this->Html->url(array('action' => 'view', $cuota['Cuota']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
+							<a target="_blank" href="<?php echo $this->Html->url(array('action' => 'view', $cuota['Cuota']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
 							<?php if(isset($cuota['Cuota']['photo']) && $cuota['Cuota']['photo'] != ''){ ?>								
 								<?php echo $this->Html->link(
 								    'Adjunto',

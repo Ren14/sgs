@@ -152,23 +152,25 @@ public function view($id = null , $imprimir = null) {
 	foreach ($recibo['ReciboDetalle'] as $key => $detalle) {
 			# CUOTA AGUA
 		if($recibo['Recibo']['tipo'] == 1){
-			$cuota_agua = $this->CuotaAgua->find('first', array('conditions' => array('CuotaAgua.id' => $detalle['cuota_agua_id']), 'recursive' => -1, 'fields' => array('CuotaAgua.numero', 'CuotaAgua.monto', 'CuotaAgua.cantidad', 'CuotaAgua.estado', 'CuotaAgua.fecha_pago')));
+			$cuota_agua = $this->CuotaAgua->find('first', array('conditions' => array('CuotaAgua.id' => $detalle['cuota_agua_id']), 'recursive' => -1, 'fields' => array('CuotaAgua.numero', 'CuotaAgua.monto', 'CuotaAgua.cantidad', 'CuotaAgua.estado', 'CuotaAgua.fecha_pago', 'CuotaAgua.justificacion')));
 			$recibo['ReciboDetalle'][$key]['cuota_numero'] = $cuota_agua['CuotaAgua']['numero'];
 			$recibo['ReciboDetalle'][$key]['cuota_monto'] = $cuota_agua['CuotaAgua']['monto'];
 			$recibo['ReciboDetalle'][$key]['descripcion'] = $cuota_agua['CuotaAgua']['cantidad'] . " Cuotas";
 			$recibo['ReciboDetalle'][$key]['estado'] = $estados_ca[$cuota_agua['CuotaAgua']['estado']];
 			$recibo['ReciboDetalle'][$key]['fecha_pago'] = date('d-m-Y', strtotime($cuota_agua['CuotaAgua']['fecha_pago']));
+			$recibo['ReciboDetalle'][$key]['justificacion'] = $cuota['CuotaAgua']['justificacion'];
 		}
 
 			# CUOTA
 		if($recibo['Recibo']['tipo'] == 2){
-			$cuota = $this->Cuota->find('first', array('conditions' => array('Cuota.id' => $detalle['cuota_id']), 'recursive' => -1, 'fields' => array('Cuota.numero', 'Cuota.monto', 'Cuota.anio_pago', 'Cuota.mes_desde', 'Cuota.mes_hasta', 'Cuota.fecha_pago', 'Cuota.estado', 'Cuota.observacion')));
+			$cuota = $this->Cuota->find('first', array('conditions' => array('Cuota.id' => $detalle['cuota_id']), 'recursive' => -1, 'fields' => array('Cuota.numero', 'Cuota.monto', 'Cuota.anio_pago', 'Cuota.mes_desde', 'Cuota.mes_hasta', 'Cuota.fecha_pago', 'Cuota.estado', 'Cuota.observacion', 'Cuota.justificacion')));
 			$recibo['ReciboDetalle'][$key]['cuota_numero'] = $cuota['Cuota']['numero'];
 			$recibo['ReciboDetalle'][$key]['cuota_monto'] = $cuota['Cuota']['monto'];
 			$recibo['ReciboDetalle'][$key]['descripcion'] = $cuota['Cuota']['anio_pago'] . " " . $meses[$cuota['Cuota']['mes_desde']] . "/" . $meses[$cuota['Cuota']['mes_hasta']];
 			$recibo['ReciboDetalle'][$key]['estado'] = $estados_c[$cuota['Cuota']['estado']];
 			$recibo['ReciboDetalle'][$key]['fecha_pago'] = date('d-m-Y', strtotime($cuota['Cuota']['fecha_pago']));
 			$recibo['ReciboDetalle'][$key]['observacion'] = $cuota['Cuota']['observacion'];
+			$recibo['ReciboDetalle'][$key]['justificacion'] = $cuota['Cuota']['justificacion'];			
 		}
 
 			# LOTE
@@ -227,13 +229,15 @@ public function add() {
 
 
 	public function total_recaudado(){
+		$this->params['controller'] = 'Reportes'; # Defino el nombre mostrado en el encabezado de la vista
 		if($this->request->is('post')){
 			$fecha_ini = $this->request->data['Recibo']['fecha_ini'];
 			$fecha_fin = $this->request->data['Recibo']['fecha_fin'];
 			$optionsTotal = array(
 				'conditions' => array(
 					'date(Cuota.fecha_pago) BETWEEN ? AND ?' => array($fecha_ini, $fecha_fin),
-					'Cuota.recibo_id <>' => NULL
+					'Cuota.recibo_id <>' => NULL,
+					'Cuota.activo' => 1,
 				),
 				'fields' => array(
 					'sum(Cuota.monto) AS monto'
@@ -245,7 +249,7 @@ public function add() {
 
 			$TotalSocial = $this->Cuota->find('all',$optionsTotal);
 
-			$optionsTotal['conditions'] = array('date(CuotaAgua.fecha_pago) BETWEEN ? AND ?' => array($fecha_ini, $fecha_fin), 'CuotaAgua.recibo_id <>' => NULL ); 	
+			$optionsTotal['conditions'] = array('date(CuotaAgua.fecha_pago) BETWEEN ? AND ?' => array($fecha_ini, $fecha_fin), 'CuotaAgua.recibo_id <>' => NULL, 'CuotaAgua.activo' => 1 ); 	
 			$optionsTotal['fields'] = array('sum(CuotaAgua.monto) AS monto'); 	
 			
 			$TotalAgua = $this->CuotaAgua->find('all',$optionsTotal);

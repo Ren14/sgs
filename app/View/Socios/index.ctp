@@ -50,11 +50,11 @@
 						<td><?php echo $estado[$socio['Socio']['activo']]; ?>&nbsp;</td>
 						<!--<td><?php echo date('d-m-Y H:i',strtotime($socio['Socio']['modified'])); ?>&nbsp;</td>-->
 						<td class="actions">
-							<a href="<?php echo $this->Html->url(array('action' => 'view', $socio['Socio']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
+							<a target="_blank" href="<?php echo $this->Html->url(array('action' => 'view', $socio['Socio']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
 							<?php 
 							# SI EL USUARIO ES DISTINTO DE AUDITOR
 							if (in_array($this->Session->read('Auth.User.rol'), array(2,3))) { ?>
-								<a href="<?php echo $this->Html->url(array('action' => 'edit', $socio['Socio']['id']	)); ?>" type="button" class="btn btn-outline btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+								<a target="_blank" href="<?php echo $this->Html->url(array('action' => 'edit', $socio['Socio']['id']	)); ?>" type="button" class="btn btn-outline btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
 								
 								<a href="#" onclick="borrar('<?php echo $socio['Socio']['id'] ?>', '<?php echo $this->Html->url(array('action' => 'desactivar')); ?>/')" type="button" class="btn btn-outline btn-danger btn-xs"><i class="fa fa-trash" title="ELIMINAR"></i></a>
 								

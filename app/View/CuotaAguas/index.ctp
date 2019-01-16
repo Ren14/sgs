@@ -74,14 +74,14 @@
 						<td data-order="<?php echo $cuotaAgua['Socio']['nombre_completo']?>">
 							<?php echo $this->Html->link($cuotaAgua['Socio']['nombre_completo'], array('controller' => 'socios', 'action' => 'view', $cuotaAgua['Socio']['id'])); ?>
 						</td>
-						<td data-order="<?php echo $cuotaAgua['CuotaAgua']['monto'] ?>">$<?php echo number_format($cuotaAgua['CuotaAgua']['monto'], 2, ",", "."); ?></td>
+						<td data-order="<?php echo $cuotaAgua['CuotaAgua']['monto'] ?>">$<?php echo number_format($cuotaAgua['CuotaAgua']['monto'], 2, ".", ","); ?></td>
 						<td data-order="<?php echo $cuotaAgua['Recibo']['numero'] ?>"><?php echo $this->Html->link($cuotaAgua['Recibo']['numero'], array('controller' => 'recibos', 'action' => 'view', $cuotaAgua['Recibo']['id'])); ?></td>
 						<td><?php echo $cuotaAgua['CuotaAgua']['cantidad']; ?></td>
 						<td data-order="<?php echo $cuotaAgua['CuotaAgua']['fecha_pago'] ?>"><?php echo date('d-m-Y', strtotime($cuotaAgua['CuotaAgua']['fecha_pago'])); ?></td>
 						
 						<td><?php echo $estados_label[$cuotaAgua['CuotaAgua']['estado']]; ?></td>
 						<td class="actions">
-							<a href="<?php echo $this->Html->url(array('action' => 'view', $cuotaAgua['CuotaAgua']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
+							<a target="_blank" href="<?php echo $this->Html->url(array('action' => 'view', $cuotaAgua['CuotaAgua']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
 							<!--<a href="<?php echo $this->Html->url(array('action' => 'edit', $cuotaAgua['CuotaAgua']['id']	)); ?>" type="button" class="btn btn-outline btn-warning btn-xs"><i class="fa fa-pencil"></i></a>-->
 							<?php if($cuotaAgua['CuotaAgua']['estado'] != 2 && in_array($this->Session->read('Auth.User.rol'), array(2,3))){ ?>
 							<a href="#" onclick="anularCuotaAgua('<?php echo $cuotaAgua['CuotaAgua']['id'] ?>')" type="button" class="btn btn-outline btn-danger btn-xs"><i class="fa fa-trash" title="ELIMINAR"></i></a>

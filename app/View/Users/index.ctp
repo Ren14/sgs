@@ -23,9 +23,9 @@
 							<td><?php echo $estados_label[$user['User']['activo']]; ?>&nbsp;</td>
 							
 							<td class="actions">
-								<a href="<?php echo $this->Html->url(array('action' => 'view', $user['User']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
+								<a target="_blank" href="<?php echo $this->Html->url(array('action' => 'view', $user['User']['id']	)); ?>" type="button" class="btn btn-outline btn-success btn-xs"><i class="fa fa-search"></i></a>
 								<?php if(in_array($this->Session->read('Auth.User.rol'), array(3))){ ?>
-									<a href="<?php echo $this->Html->url(array('action' => 'edit', $user['User']['id']	)); ?>" type="button" class="btn btn-outline btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+									<a target="_blank" href="<?php echo $this->Html->url(array('action' => 'edit', $user['User']['id']	)); ?>" type="button" class="btn btn-outline btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
 									
 								<?php } ?>
 								<!--<a href="#" onclick="borrar('<?php echo $user['User']['id'] ?>')" type="button" class="btn btn-outline btn-danger btn-xs"><i class="fa fa-trash" title="BORRAR USUARIO"></i>-->
