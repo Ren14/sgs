@@ -179,10 +179,11 @@ public $components = array('Paginator','Session');
  */
 public function index($filtro_estado = 99, $filtro_lote = 99, $filtro_socio = 99, $filtro_numero_recibo = 99,$desde = null, $hasta = null) {
 	$rol = $this->Session->read('Auth.User.rol');
-	if($rol == 1){
+	if($rol == 1){  # Para el Rol 1 (Socio)
 		$options = array(
 				//'Cuota.activo' => 1,
-				'Lote.socio_id' => $this->Session->read('Auth.User.socio_id')
+				'Lote.socio_id' => $this->Session->read('Auth.User.socio_id'),
+				'Cuota.estado' => array(0,1,3), # Solicito las cuotas con estado Pendiente, Cobrado o Cobro Condicional
 			);
 	}else{
 		$options = array();

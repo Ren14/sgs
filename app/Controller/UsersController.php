@@ -1,5 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
+App::import('Vendor', 'mobile_detect', array('file' => 'mobile_detect/Mobile_Detect.php'));
+
 /**
  * Users Controller
  *
@@ -56,7 +58,7 @@ public function login() {
 	}
 	if ($this->request->is('post')) {
 		if ($this->Auth->login()) {
-			$this->log($_SERVER, 'debug');
+			
 			if($this->Session->read('Auth.User.rol') == 1){
 				$socio = $this->Socio->find('first',array(
 					'conditions' => array(
@@ -76,7 +78,15 @@ public function login() {
         	// AGREGO A LA BITACORA
 			$this->loadModel('Bitacora');
 			$this->Bitacora->agregarBitacora('Login');
-			return $this->redirect(array('controller' => 'Pages', 'action' => 'display'));
+
+			$detect = new Mobile_Detect();
+
+			if ($detect->isMobile() || $detect->isTablet()) {
+				return $this->redirect(array('controller' => 'Pages', 'action' => 'homeMovil'));
+			} else {
+				return $this->redirect(array('controller' => 'Pages', 'action' => 'display'));
+			}
+
 		}
 		$this->Flash->error(__('Usuario/Contraseña incorrecto. Pruebe nuevamente'));
 	}
