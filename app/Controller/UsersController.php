@@ -81,7 +81,7 @@ public function login() {
 
 			$detect = new Mobile_Detect();
 
-			if ($detect->isMobile() || $detect->isTablet()) {
+			if ($detect->isMobile() || $detect->isTablet()) { # Si es un dispositivo movil
 				return $this->redirect(array('controller' => 'Pages', 'action' => 'homeMovil'));
 			} else {
 				return $this->redirect(array('controller' => 'Pages', 'action' => 'display'));
